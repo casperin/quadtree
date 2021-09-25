@@ -53,10 +53,10 @@ let found_points = quad_tree.search((40, 90, 40, 90));
 ## Status
 
 I wrote this on a Friday evening and half a Saturday. I just read about the
-algorithm, and thought it'd be fun to attempt to implement in Rust because 1)
-recursive structures aren't always that easy in Rust, 2) I haven't done much
-with benchmarking, and 3) I wanted it to be generic enough to hold and number
-type (it is, and you can even extend it with your own type if you so desire).
+algorithm and thought it'd be fun to implement in Rust because 1) recursive
+structures aren't always that easy in Rust, 2) I haven't done much with
+benchmarking, and 3) I wanted it to be generic enough to hold any number type
+(it is, and you can even extend it with your own type if you so desire).
 
 I did not add this to crates.io.
 
@@ -66,13 +66,16 @@ I did not add this to crates.io.
 MIT.
 
 Honestly I'd just copy the file into my own project if I needed something like
-this. Please star it if you use it. Then I might consider giving it some more
-love. :)
+this.
+
+Please star it if you use it. It's always nice to know someone found your thing
+and found it useful. :)
+
 
 ## Benchmarks
 
-There are benchmarks written for in Criterion. Here is a screenshot (I hope) of
-a run vs a naive implementation that just scans all points when searching.
+There are benchmarks written for Criterion. Here is a screenshot (I hope) of a
+run vs a naive implementation that just scans all points when searching.
 
 ![Benchmark graph](benches/vs_naive.svg "QuadTree vs Naive")
 
