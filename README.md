@@ -78,5 +78,5 @@ and found it useful. :)
 There are benchmarks written for Criterion. Here is a screenshot (I hope) of a
 run vs a naive implementation that just scans all points when searching.
 
-![Benchmark graph](benches/vs_naive.svg "QuadTree vs Naive")
+![Benchmark graph](benches/vsnaive.svg "QuadTree vs Naive")
 
