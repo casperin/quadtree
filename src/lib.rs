@@ -20,13 +20,10 @@ where
     }
 
     pub fn insert(&mut self, point: Point<T>) -> bool {
-        // If the point is outside the node's boundary, return false
         if !Self::contains(&self.get_boundary(), &point) {
             return false;
         }
 
-        // If this node has not yet reached its capacity and has not
-        // yet been subdivided, insert the point into this node
         if let QuadTree::Leaf(capacity, _, points) = self {
             if points.len() < *capacity {
                 if !points.iter().any(|p| *p == point) {
@@ -36,7 +33,6 @@ where
             }
         }
 
-        // Split leaf into Node of four leafs
         if let QuadTree::Leaf(capacity, boundary, points) = self {
             let (x1, x2, y1, y2) = boundary;
             let mid_x = x1.midpoint(*x2);

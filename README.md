@@ -12,17 +12,17 @@ lying within a certain space.
 ```
 Y
 
-┃   x                                               x
-┃                       x                                            x
-┃                x             x                           x
+┃   •                                               •
+┃                       •                                            •
+┃                •             •                           •
 ┃                                  ┌───────────────────────┐
-┃                                  │      o                │
-┃    x                             │ o                  o  │
-┃                  x               │                       │
-┃            x            x        │              o        │         x
-┃                   x              │           o           │
-┃    x                             │     o                 │
-┃                                  └───────────────────────┘   x
+┃                                  │      ●                │
+┃    •                             │ ●                  ●  │
+┃                  •               │                       │
+┃            •            •        │              ●        │         •
+┃                   •              │           ●           │
+┃    •                             │     ●                 │
+┃                                  └───────────────────────┘   •
 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ X
 ```
@@ -52,11 +52,12 @@ let found_points = quad_tree.search((40, 90, 40, 90));
 
 ## Status
 
-I wrote this on a Friday evening and half a Saturday. I just read about the
-algorithm and thought it'd be fun to implement in Rust because 1) recursive
-structures aren't always that easy in Rust, 2) I haven't done much with
-benchmarking, and 3) I wanted it to be generic enough to hold any number type
-(it is, and you can even extend it with your own type if you so desire).
+I wrote this on a Friday evening and half a Saturday after [reading a blog post
+on them](https://chidiwilliams.com/quadtrees/). I just read about the algorithm
+and thought it'd be fun to implement in Rust because 1) recursive structures
+aren't always that easy in Rust, 2) I haven't done much with benchmarking, and
+3) I wanted it to be generic enough to hold any number type (it is, and you can
+even extend it with your own type if you so desire).
 
 I did not add this to crates.io.
 

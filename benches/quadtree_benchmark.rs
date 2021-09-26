@@ -31,40 +31,37 @@ where
 pub fn criterion_benchmark(c: &mut Criterion) {
     let mut rng = get_rng(10000);
     let mut group = c.benchmark_group("QuadTree vs Naive");
-    let points_counts = [100, 1000, 5000, 10000, 30000, 75000, 100000];
+    let mut at = 200;
+    let to = 5_000;
+    let inc = 200;
 
-    for points_count in points_counts {
-        let points: Vec<(u64, u64)> = (0..points_count)
-            .map(|_| (rng.next(), rng.next()))
-            .collect();
-        let search_boundary = (rng.next(), rng.next(), rng.next(), rng.next());
+    let x1 = rng.next();
+    let x2 = x1 + 50;
+    let y1 = rng.next();
+    let y2 = y1 + 50;
+    let search_boundary = (x1, x2, y1, y2);
 
-        group.bench_with_input(
-            BenchmarkId::new("QuadTree", points_count),
-            &points_count,
-            |b, _| {
-                let mut qt = QuadTree::new((0, 10000, 0, 10000));
-                for point in points.iter() {
-                    qt.insert(*point);
-                }
-                b.iter(|| qt.search(&search_boundary));
-            },
-        );
+    while at <= to {
+        let mut qt = QuadTree::new((0, 10000, 0, 10000));
+        let mut naive = Naive {
+            boundary: (0, 10000, 0, 10000),
+            points: vec![],
+        };
+        for _ in 0..at {
+            let p = (rng.next(), rng.next());
+            qt.insert(p);
+            naive.insert(p);
+        }
 
-        group.bench_with_input(
-            BenchmarkId::new("Naive", points_count),
-            &points_count,
-            |b, _| {
-                let mut naive = Naive {
-                    boundary: (0, 10000, 0, 10000),
-                    points: vec![],
-                };
-                for point in points.iter() {
-                    naive.insert(*point);
-                }
-                b.iter(|| naive.search(&search_boundary));
-            },
-        );
+        group.bench_with_input(BenchmarkId::new("QuadTree", at), &at, |b, _| {
+            b.iter(|| qt.search(&search_boundary));
+        });
+
+        group.bench_with_input(BenchmarkId::new("Naive", at), &at, |b, _| {
+            b.iter(|| naive.search(&search_boundary));
+        });
+
+        at += inc;
     }
 
     group.finish();
